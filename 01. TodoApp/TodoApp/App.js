@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Header from './app/components/Header';
 import Subtitle from './app/components/Subtitle';
 import Input from './app/components/Input';
+import TodoItem from './app/components/TodoItem';
 
 
 export default function App() {
@@ -13,12 +14,15 @@ export default function App() {
       </View>
 
       <View style={styles.subtitle_container}>
-        <Subtitle title='Input your Todo : '/>
+        <Subtitle title='Input My Todo : '/>
         <Input/>
       </View>
 
       <View style={styles.subtitle_container}>
-        <Subtitle title='Your Todo List : '/>
+        <Subtitle title='My Todo List : '/>
+
+        <TodoItem title='today'/>
+        <TodoItem title='wanna finish'/>
       </View>
 
     </View>
@@ -36,6 +40,7 @@ const styles = StyleSheet.create({
   },
   subtitle_container: {
     marginLeft:30,
+    marginRight:30,
     marginBottom:10,
   },
 
