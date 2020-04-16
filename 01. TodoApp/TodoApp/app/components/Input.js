@@ -16,7 +16,7 @@ export default function Input(value) {
 
   const styles = StyleSheet.create({
     input_text : {
-        fontSize:15,
+        fontSize:17,
         marginTop:5,
         marginBottom:25,
     }

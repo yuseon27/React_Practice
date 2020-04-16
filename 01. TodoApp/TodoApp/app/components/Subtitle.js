@@ -12,7 +12,7 @@ export default function Subtitle({title}) {
 
   const styles = StyleSheet.create({
     subtitle_text : {
-        fontSize:17,
+        fontSize:20,
         fontWeight:'bold',
         color:'#3f4e66',
     }
