@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Header from './app/components/Header';
 import Subtitle from './app/components/Subtitle';
+import Input from './app/components/Input';
+
 
 export default function App() {
   return (
@@ -12,6 +14,7 @@ export default function App() {
 
       <View style={styles.subtitle_container}>
         <Subtitle title='Input your Todo : '/>
+        <Input/>
       </View>
 
       <View style={styles.subtitle_container}>
