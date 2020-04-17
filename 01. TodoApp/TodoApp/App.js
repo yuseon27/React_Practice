@@ -11,7 +11,24 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       input_value : '',
-      todos : [{title:'holahola'}, {title:'holaholaaa'}],
+      todos : [{title:'holahola'}, {title:'holaholaaa'}, {title:'holaholaaa'}],
+    }
+  }
+
+  _changeText=(value)=>{
+    this.setState({input_value:value});
+  }
+
+  _addTodoItem=()=>{
+    if (this.state.input_value !== '') {
+      const prev_todos = this.state.todos;
+      const new_todo   = {title:this.state.input_value}
+
+      this.setState({
+        input_value : '',
+        todos : prev_todos.concat(new_todo)
+      });
+
     }
   }
 
@@ -32,7 +49,11 @@ export default class App extends React.Component {
 
         <View style={styles.subtitle_container}>
           <Subtitle title='Input My Todo : ' />
-          <Input/>
+          <Input
+            value={this.state.input_value}
+            change_text={this._changeText}
+            add_todo_item={this._addTodoItem}
+          />
         </View>
 
         <View style={styles.subtitle_container}>

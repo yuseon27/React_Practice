@@ -1,15 +1,18 @@
 import React from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 
-export default function Input(value) {
+export default function Input({value, change_text, add_todo_item}) {
     return (
         <TextInput
+            value = {value}
+            onChangeText = {change_text}
+            onEndEditing = {add_todo_item}
+
             style={styles.input_text}
             placeholder={'TODOTODOTODO'}
             maxLength={30}
             returnKeyType='done'
-        >
-        </TextInput>
+        />
     );
   }
 
