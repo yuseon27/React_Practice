@@ -24,11 +24,11 @@ export default class App extends React.Component {
     }
   }
 
-  _changeText=(i_value)=>{
+  _changeText = (i_value) => {
     this.setState({input_value:i_value});
   }
 
-  _addTodoItem=()=>{
+  _addTodoItem = () => {
     if (this.state.input_value !== '') {
       const prev_todos = this.state.todos;
       const new_todo   = {title:this.state.input_value, is_complete:false}
@@ -41,26 +41,21 @@ export default class App extends React.Component {
     }
   }
 
-  /*
-  _changeComplete=(index)=>{
+  
+  _changeComplete = (index) => {
     const new_todo = [...this.state.todos];
     new_todo[index].is_complete = !new_todo[index].is_complete;
 
     this.setState({todos:new_todo})
   }
-*/
 
-  _makeTodoItem = ({item, index}) =>{
+
+  _makeTodoItem = ({item, index}) => {
     return (
       <TodoItem
         title = {item.title}
         is_complete = {item.is_complete}
-        change_complete = {()=>{
-          const new_todo = [...this.state.todos]
-          new_todo[index].is_complete = !new_todo[index].is_complete
-      
-          this.setState({todos:new_todo})
-        }}
+        change_complete = {()=>this._changeComplete(index)}
       />
     )
   }
