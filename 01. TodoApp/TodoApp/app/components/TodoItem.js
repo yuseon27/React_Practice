@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Dimensions, TextInput, TouchableOpacity } from 'react-native';
 import {AntDesign} from '@expo/vector-icons';
 
-export default function TodoItem({title, is_complete, change_complete}) {
+export default function TodoItem({title, is_complete, change_complete, delete_item}) {
     return (
         <View style={styles.list_item_box}>
 
@@ -13,14 +13,14 @@ export default function TodoItem({title, is_complete, change_complete}) {
                 <Text style={styles.todo_text}>{title}</Text>
             </View>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={delete_item}>
                 <AntDesign name='close' size={20}/>   
             </TouchableOpacity>
       </View>
     );
   }
 
-  const {width, height} = Dimensions.get('window')
+  // const {width, height} = Dimensions.get('window')
 
   const styles = StyleSheet.create({
       list_item_box : {

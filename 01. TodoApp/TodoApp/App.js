@@ -40,13 +40,19 @@ export default class App extends React.Component {
 
     }
   }
-
-  
+ 
   _changeComplete = (index) => {
     const new_todo = [...this.state.todos];
     new_todo[index].is_complete = !new_todo[index].is_complete;
 
     this.setState({todos:new_todo})
+  }
+
+  
+  _deleteItem = (index) => {
+    const new_todo = [...this.state.todos];
+    new_todo.splice(index, 1);
+    this.setState({todos:new_todo});
   }
 
 
@@ -56,6 +62,7 @@ export default class App extends React.Component {
         title = {item.title}
         is_complete = {item.is_complete}
         change_complete = {()=>this._changeComplete(index)}
+        delete_item = {()=>this._deleteItem(index)}
       />
     )
   }
