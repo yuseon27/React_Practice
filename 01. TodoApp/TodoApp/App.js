@@ -1,32 +1,42 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 import Header from './app/components/Header';
 import Subtitle from './app/components/Subtitle';
 import Input from './app/components/Input';
 import TodoItem from './app/components/TodoItem';
 
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <View style={styles.header_container}>
-        <Header title='TODO'/>
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input_value : '',
+      todos : [],
+    }
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.header_container}>
+          <Header title='TODO' />
+        </View>
+
+        <View style={styles.subtitle_container}>
+          <Subtitle title='Input My Todo : ' />
+          <Input/>
+        </View>
+
+        <View style={styles.subtitle_container}>
+          <Subtitle title='My Todo List : ' />
+
+          <TodoItem title='today' />
+          <TodoItem title='wanna finish' />
+        </View>
+
       </View>
-
-      <View style={styles.subtitle_container}>
-        <Subtitle title='Input My Todo : '/>
-        <Input/>
-      </View>
-
-      <View style={styles.subtitle_container}>
-        <Subtitle title='My Todo List : '/>
-
-        <TodoItem title='today'/>
-        <TodoItem title='wanna finish'/>
-      </View>
-
-    </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
