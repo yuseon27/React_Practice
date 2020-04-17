@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList, AsyncStorage } from 'react-native';
 import Header from './app/components/Header';
 import Subtitle from './app/components/Subtitle';
 import Input from './app/components/Input';
@@ -24,6 +24,22 @@ export default class App extends React.Component {
     }
   }
 
+  componentWillMount() {
+    this.getData()
+  }
+
+  storeData=()=>{
+    AsyncStorage.setItem('@todo:state', JSON.stringify(this.state));
+  }
+
+  getData=()=>{
+    AsyncStorage.getItem('@todo:state').then((state)=> {
+      if(state !== null) {
+        this.setState(JSON.parse(state));
+      } 
+    })
+  }
+
   _changeText = (i_value) => {
     this.setState({input_value:i_value});
   }
@@ -36,7 +52,7 @@ export default class App extends React.Component {
       this.setState({
         input_value : '',
         todos : prev_todos.concat(new_todo)
-      });
+      }, this.storeData);
 
     }
   }
@@ -45,14 +61,13 @@ export default class App extends React.Component {
     const new_todo = [...this.state.todos];
     new_todo[index].is_complete = !new_todo[index].is_complete;
 
-    this.setState({todos:new_todo})
+    this.setState({todos:new_todo}, this.storeData)
   }
 
-  
   _deleteItem = (index) => {
     const new_todo = [...this.state.todos];
     new_todo.splice(index, 1);
-    this.setState({todos:new_todo});
+    this.setState({todos:new_todo}, this.storeData);
   }
 
 
@@ -112,6 +127,5 @@ const styles = StyleSheet.create({
     marginRight:30,
     marginBottom:10,
   },
-
 
 });
