@@ -2,13 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, View, Dimensions, TextInput, TouchableOpacity } from 'react-native';
 import {AntDesign} from '@expo/vector-icons';
 
-export default function TodoItem({title}) {
+export default function TodoItem({title, is_complete, change_complete}) {
     return (
         <View style={styles.list_item_box}>
 
             <View style={styles.make_row}>
-                <TouchableOpacity>
-                    <AntDesign name='checkcircle' size={20} style={styles.check_box}/>   
+                <TouchableOpacity onPress={change_complete}>
+                    <AntDesign name={is_complete ? 'checkcircle' : 'frowno'} size={20} style={styles.check_box}/>   
                 </TouchableOpacity>
                 <Text style={styles.todo_text}>{title}</Text>
             </View>

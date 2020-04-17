@@ -5,24 +5,33 @@ import Subtitle from './app/components/Subtitle';
 import Input from './app/components/Input';
 import TodoItem from './app/components/TodoItem';
 
+/*
+1. Make UI
+2. Make todo list into FlatList
+3. Make input to added to todo list
+4. Check that is done
+5. Delete items
+6. Store data
+*/
+
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       input_value : '',
-      todos : [{title:'holahola'}, {title:'holaholaaa'}, {title:'holaholaaa'}],
+      todos : [],  // [{title:'holahola', is_complete:false}, {title:'holaholaaa', is_complete:true}]
     }
   }
 
-  _changeText=(value)=>{
-    this.setState({input_value:value});
+  _changeText=(i_value)=>{
+    this.setState({input_value:i_value});
   }
 
   _addTodoItem=()=>{
     if (this.state.input_value !== '') {
       const prev_todos = this.state.todos;
-      const new_todo   = {title:this.state.input_value}
+      const new_todo   = {title:this.state.input_value, is_complete:false}
 
       this.setState({
         input_value : '',
@@ -32,10 +41,26 @@ export default class App extends React.Component {
     }
   }
 
-  _makeTodoItem({item, index}) {
+  /*
+  _changeComplete=(index)=>{
+    const new_todo = [...this.state.todos];
+    new_todo[index].is_complete = !new_todo[index].is_complete;
+
+    this.setState({todos:new_todo})
+  }
+*/
+
+  _makeTodoItem = ({item, index}) =>{
     return (
       <TodoItem
-        title={item.title}
+        title = {item.title}
+        is_complete = {item.is_complete}
+        change_complete = {()=>{
+          const new_todo = [...this.state.todos]
+          new_todo[index].is_complete = !new_todo[index].is_complete
+      
+          this.setState({todos:new_todo})
+        }}
       />
     )
   }
@@ -58,9 +83,6 @@ export default class App extends React.Component {
 
         <View style={styles.subtitle_container}>
           <Subtitle title='My Todo List : ' />
-
-          <TodoItem title='today' />
-          <TodoItem title='wanna finish' />
 
           <FlatList
             data={this.state.todos}

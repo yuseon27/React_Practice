@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 
-export default function Input({value, change_text, add_todo_item}) {
+export default function Input({i_value, change_text, add_todo_item}) {
     return (
         <TextInput
-            value = {value}
+            value = {i_value}
             onChangeText = {change_text}
             onEndEditing = {add_todo_item}
 
