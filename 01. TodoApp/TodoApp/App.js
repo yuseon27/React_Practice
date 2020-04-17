@@ -11,8 +11,16 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       input_value : '',
-      todos : [],
+      todos : [{title:'holahola'}, {title:'holaholaaa'}],
     }
+  }
+
+  _makeTodoItem({item, index}) {
+    return (
+      <TodoItem
+        title={item.title}
+      />
+    )
   }
 
   render() {
@@ -32,6 +40,12 @@ export default class App extends React.Component {
 
           <TodoItem title='today' />
           <TodoItem title='wanna finish' />
+
+          <FlatList
+            data={this.state.todos}
+            renderItem={this._makeTodoItem}
+            keyExtractor={(item, index)=>{return '${index}'}}
+          />
         </View>
 
       </View>
