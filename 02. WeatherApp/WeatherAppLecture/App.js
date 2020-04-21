@@ -4,7 +4,23 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 import Weather from './app/Weather';
 
+// https://samples.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=f3d674bdcb10c90903255ee16eeeb87d
+const API_KEY = 'f3d674bdcb10c90903255ee16eeeb87d'    // use "fetch / axios" to use api
+
+
 export default class App extends React.Component {
+
+  componentDidMount(){
+    this._getWeather()
+  }
+
+  _getWeather = async() => {  // async : process sequentially in this function
+    const _response = await fetch(`https://samples.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=${API_KEY}`)  // ` : backtick , wait until execute ... celsius : &units=metric
+    const _json_weather = await _response.json()
+
+    //console.log(_response)
+    console.log(_json_weather)
+  }
 
   render() {
     return (
@@ -36,11 +52,13 @@ const styles = StyleSheet.create({
   },
   icon_area:{
     flex:2,
-    borderWidth:10,
+    justifyContent:'center',
+    alignItems:'center',
   },
   weather_area:{
     flex:1,
-    borderWidth:10,
+    justifyContent:'center',
+    alignItems:'flex-end',
   },
 
 });
