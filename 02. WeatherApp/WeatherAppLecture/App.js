@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 
 import Weather from './app/Weather';
 
@@ -10,6 +9,11 @@ const API_KEY = 'f3d674bdcb10c90903255ee16eeeb87d'    // use "fetch / axios" to 
 
 export default class App extends React.Component {
 
+  constructor (props) {
+    super(props);
+    this.state= {}
+  }
+
   componentDidMount(){
     this._getWeather()
   }
@@ -18,47 +22,26 @@ export default class App extends React.Component {
     const _response = await fetch(`https://samples.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=${API_KEY}`)  // ` : backtick , wait until execute ... celsius : &units=metric
     const _json_weather = await _response.json()
 
-    //console.log(_response)
+    this.setState({temp:Math.floor(_json_weather.main.temp), title:_json_weather.weather[0].main})
+
     console.log(_json_weather)
   }
 
   render() {
     return (
-      <LinearGradient
-        colors={['#4c669f', '#3b5998', '#ffffff']}
-        style={styles.weather_back}>
-
-        <View style={styles.icon_area}>
-          <Text>
-            Place for Icon
-          </Text>
-        </View>
-
-        <View style={styles.weather_area}>
-          <Text>
-            Place for Weather
-          </Text>
-        </View>
-
-      </LinearGradient>
+      console.log(this.state),
+      <View style={styles.container}>
+        <Weather temp={this.state.temp} title={this.state.title}/>
+      </View>
     );
   }
 
 }
 
 const styles = StyleSheet.create({
-  weather_back:{
-    flex:1,
-  },
-  icon_area:{
-    flex:2,
-    justifyContent:'center',
-    alignItems:'center',
-  },
-  weather_area:{
-    flex:1,
-    justifyContent:'center',
-    alignItems:'flex-end',
-  },
+
+      container: {
+        flex: 1,
+      },
 
 });
