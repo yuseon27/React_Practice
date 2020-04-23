@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 
 import Weather from './app/Weather';
 
@@ -11,7 +11,9 @@ export default class App extends React.Component {
 
   constructor (props) {
     super(props);
-    this.state= {}
+    this.state= {
+      isloaded : false,
+    }
   }
 
   componentDidMount(){
@@ -22,7 +24,7 @@ export default class App extends React.Component {
     const _response = await fetch(`https://samples.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=${API_KEY}`)  // ` : backtick , wait until execute ... celsius : &units=metric
     const _json_weather = await _response.json()
 
-    this.setState({temp:Math.floor(_json_weather.main.temp), title:_json_weather.weather[0].main})
+    this.setState({isloaded : true, temp:Math.floor(_json_weather.main.temp), title:_json_weather.weather[0].main})
 
     console.log(_json_weather)
   }
@@ -31,7 +33,7 @@ export default class App extends React.Component {
     return (
       console.log(this.state),
       <View style={styles.container}>
-        <Weather temp={this.state.temp} title={this.state.title}/>
+        {this.state.isloaded? <Weather temp={this.state.temp} title={this.state.title}/> : <ActivityIndicator style={styles.indicator_location} color='black' size='large'/>}
       </View>
     );
   }
@@ -40,8 +42,12 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
 
-      container: {
-        flex: 1,
-      },
+  container: {
+    flex: 1,
+  },
+
+  indicator_location: {
+    flex: 1,
+  }
 
 });
