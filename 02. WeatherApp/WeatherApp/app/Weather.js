@@ -49,7 +49,7 @@ export default function Weather({temperature, icon_msg}) {
                     {icon_msg}
                 </Text>
                 <Text style={styles.info_text}> 
-                    {temperature} ℉
+                    {temperature} °C
                 </Text>
             </View>
 

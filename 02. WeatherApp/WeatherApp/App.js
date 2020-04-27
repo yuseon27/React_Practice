@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, ActivityIndicator} from 'react-native';
 import Weather from './app/Weather'
+import * as Location from 'expo-location';
 
 /*
 1. Linear Gradient
@@ -26,10 +27,15 @@ export default class App extends React.Component {
   }
 
   _getWeatherInfo = async() => {
-    const _response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=${API_KEY}&units=metric`)
+    // await Location.requestPermissionsAsync()  // For allowing permission
+    const _location = await Location.getCurrentPositionAsync()
+    const {coords : {latitude, longitude}} = _location
+    console.log(latitude, longitude)
+
+    const _response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`)
     const _json_weather = await _response.json()
 
-    console.log(_json_weather)
+    console.log(_json_weather.main.temp, _json_weather.weather[0].main)
 
     this.setState({is_loaded:true, temperature:Math.floor(_json_weather.main.temp), icon_msg:_json_weather.weather[0].main})
   }
