@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default function Weather() {
+export default function Weather({temperature, icon_msg}) {
     return (
         <LinearGradient
             colors={['#CAC531', '#F3F9A7']}
@@ -10,13 +10,16 @@ export default function Weather() {
         >
             <View style={styles.icon_container}>
                 <Text>
-                    Here is a place for icon
+                    {icon_msg}
                 </Text>
             </View>
 
             <View style={styles.info_container}>
-                <Text> 
-                    Here is a place for the informaiton of weather
+                <Text style={styles.info_text}>
+                    {icon_msg}
+                </Text>
+                <Text style={styles.info_text}> 
+                    {temperature} ℉
                 </Text>
             </View>
 
@@ -39,7 +42,11 @@ export default function Weather() {
         alignItems:'flex-end',
         paddingRight:50,
     },
-
+    info_text : {
+        fontSize:30,
+        color:'#FFFFFF',
+        fontWeight:'bold',
+    }
 
   });
   
