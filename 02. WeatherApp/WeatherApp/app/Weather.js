@@ -5,9 +5,20 @@ import { LinearGradient } from 'expo-linear-gradient';
 export default function Weather() {
     return (
         <LinearGradient
-            colors={['#4c669f', '#3b5998', '#192f6a']}
+            colors={['#CAC531', '#F3F9A7']}
             style={styles.weather_back}
         >
+            <View style={styles.icon_container}>
+                <Text>
+                    Here is a place for icon
+                </Text>
+            </View>
+
+            <View style={styles.info_container}>
+                <Text> 
+                    Here is a place for the informaiton of weather
+                </Text>
+            </View>
 
         </LinearGradient>
     );
@@ -20,9 +31,13 @@ export default function Weather() {
     },
     icon_container : {
         flex : 2,
+        justifyContent:'center',
+        alignItems:'center',
     },
-    text_container : {
+    info_container : {
         flex : 1,
+        alignItems:'flex-end',
+        paddingRight:50,
     },
 
 
