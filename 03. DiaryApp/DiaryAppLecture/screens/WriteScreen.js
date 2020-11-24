@@ -7,7 +7,7 @@ export default class WriteScreen extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <WriteHeader />
+        <WriteHeader/>
         <Text style={styles.text_style}>Write Screen</Text>
       </SafeAreaView>
     );
